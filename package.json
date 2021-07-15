@@ -11,5 +11,9 @@
   "dependencies": {},
   "devDependencies": {
     "nodemon": "^2.0.12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MARCROCK22/connect4-ai.git"
+  },
 }
