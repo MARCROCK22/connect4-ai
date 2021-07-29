@@ -125,6 +125,7 @@ class Connect4 {
 	 */
 	canPlay(play) {
 		try {
+			if (isNaN(play)) return false;
 			if (!this.start) return true;
 			if (this.finished) return false;
 			return this.map[play][this.lengthArr - 1].key == 0;
