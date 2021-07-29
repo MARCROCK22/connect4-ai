@@ -11,5 +11,3 @@ partida.play(2);
 console.log(partida.playAI('hard'));
 
 console.log(partida);
-const arr = [1, 2, 2, 2, 1, 1, 1].map(key => { return { key } });
-console.log(partida.checkArr(arr));
