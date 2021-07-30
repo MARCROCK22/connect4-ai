@@ -161,7 +161,7 @@ class Connect4 {
 					if (veces >= 4) break;
 					encontrado = j.key;
 					veces = j.key ? 1 : 0;
-					solution = j.key ? [j] : null;
+					solution = j.key ? [j] : [];
 				}
 			}
 		}
