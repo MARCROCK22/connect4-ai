@@ -160,8 +160,8 @@ class Connect4 {
 				} else {
 					if (veces >= 4) break;
 					encontrado = j.key;
-					veces = 1;
-					solution = [j];
+					veces = j.key ? 1 : 0;
+					solution = j.key ? [j] : null;
 				}
 			}
 		}
