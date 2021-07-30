@@ -1,6 +1,6 @@
 {
   "name": "@lil_marcrock22/connect4-ai",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Connect4 game.",
   "main": "./src/index.js",
   "scripts": {
