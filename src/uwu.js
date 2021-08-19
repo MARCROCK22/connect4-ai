@@ -211,9 +211,9 @@ class Connect4 {
 }
 
 class Connect4AI extends Connect4 {
-  constructor(w = 7, h = 6) {
+  constructor(w = 7, h = 6, recursiveDepthLimit = 3) {
     super(w, h);
-    this.recursiveDepthLimit = 3;
+    this.recursiveDepthLimit = recursiveDepthLimit;
   }
 
   playAI(difficulty = "medium") {

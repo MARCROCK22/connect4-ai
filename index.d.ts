@@ -44,7 +44,7 @@ declare namespace ModuleConnect4 {
 		constructor(options: {
 			lengthArr: number;
 			columns: number;
-		}, players: [PLAYER, PLAYER]);
+		}, players: [PLAYER, PLAYER], recursiveDepthLimit?: number);
 	}
 
 	export { Connect4, Connect4AI };
