@@ -28,10 +28,11 @@ const SOUTH = "south";
  * http://blog.gamesolver.org/
  */
 class Connect4 {
-    constructor(w = 7, h = 6) {
+    constructor(w = 7, h = 6, ntw = 3) {
         this.width = w;
         this.height = h;
         this.playerMarks = [2, 1];
+        this.ntw = ntw;
         this.reset();
     }
 
@@ -56,12 +57,12 @@ class Connect4 {
 
     /* Plays a playable column */
     play(col) {
-        if (this.gameOver) return;
-        if (!this.canPlay(col))
+        if (!this.canPlay(col) || this.gameOver)
             throw `Exception: ${col} is not a valid play. Please use canPlay(column) before submitting a move`;
 
         const solutionDirection = this.isWinningMove(col);
         if (solutionDirection) {
+            console.log(solutionDirection)
             this.gameOver = true;
             this.winner = this.getActivePlayer();
         }
@@ -91,8 +92,8 @@ class Connect4 {
       The function returns an empty string when the move is not a winning move */
     isWinningMove(col) {
         const markToBePlayed = `${this.playerMarks[(this.moveCount + 1) % 2]}`;
-        const winPreReq = markToBePlayed.repeat(3);
-
+        const winPreReq = markToBePlayed.repeat(this.ntw);
+        console.log(this.southwestBy3NortheastBy3(col), this.northwestBy3SoutheastBy3(col), this.westBy3EastBy3(col), this.southBy3(col));
         if (this.southwestBy3NortheastBy3(col).includes(winPreReq)) return SW_BY_NE;
         if (this.northwestBy3SoutheastBy3(col).includes(winPreReq)) return NW_BY_SE;
         if (this.westBy3EastBy3(col).includes(winPreReq)) return WEST_BY_EAST;
@@ -101,14 +102,14 @@ class Connect4 {
     }
 
     southBy3(col) {
-        return this.board[col].join("").slice(-3);
+        return this.board[col].join("").slice(-(this.ntw));
     }
 
     westBy3EastBy3(col, rowMovementWestToEast = 0) {
         const row = this.board[col].length;
         return Object.values(this.board).reduce((marks, colArr, colIndex) => {
             const colDelta = colIndex - col;
-            if (Math.abs(colDelta) > 3 || colDelta === 0) return marks;
+            if (Math.abs(colDelta) > this.ntw || colDelta === 0) return marks;
 
             const mark = colArr[row + rowMovementWestToEast * colDelta] || "_";
             return marks + mark;
@@ -220,8 +221,11 @@ class Connect4 {
 }
 
 class Connect4AI extends Connect4 {
-    constructor(w = 7, h = 6, recursiveDepthLimit = 3) {
+    constructor(w = 7, h = 6, recursiveDepthLimit = 3, ntw = 3) {
         super(w, h);
+        this.w = w;
+        this.h = h;
+        this.ntw = 3;
         this.recursiveDepthLimit = recursiveDepthLimit;
     }
 
@@ -281,7 +285,7 @@ class Connect4AI extends Connect4 {
     }
 
     recreateBoard(gamePlays) {
-        const newBoard = new Connect4();
+        const newBoard = new Connect4(this.w, this.h, this.ntw);
         if (gamePlays) {
             newBoard.playMoves(gamePlays.split(" "));
         }
@@ -329,4 +333,4 @@ function getRandomEle(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-module.exports = {Connect4AI};
+module.exports = {Connect4AI, Connect4};

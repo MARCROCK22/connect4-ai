@@ -3,7 +3,7 @@ const Connect4 = require("./normal.js");
 
 class Connect4AI extends Connect4 {
     playAI(difficulty = "medium", depth = 3) {
-        const board = new AI(this.columns, this.lengthArr, depth);
+        const board = new AI(this.columns, this.lengthArr, depth, this.necessaryToWin - 1);
         for (let i of this.plays) {
             board.play(i);
         }
