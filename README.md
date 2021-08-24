@@ -12,7 +12,7 @@ interface Player {
 }
 
 const { Connect4AI } = require('@lil_marcrock22/connect4-ai'); 
-const TheGame = new Connect4AI<Player>({ lengthArr: 6, columns: 7 }, 
+const TheGame = new Connect4AI<Player>({ lengthArr: 6, columns: 7, necessaryToWin: 4 }, 
 	[{ turn: 1, id: '123' }, { turn: 2, id: '456' }]//This is for <Game>.players
 );
 TheGame.createBoard();
@@ -21,7 +21,7 @@ TheGame.createBoard();
 ## How to use (JavaScript)
 ```js
 const { Connect4AI } = require('@lil_marcrock22/connect4-ai'); 
-const TheGame = new Connect4AI({ lengthArr: 6, columns: 7 }, 
+const TheGame = new Connect4AI({ lengthArr: 6, columns: 7, necessaryToWin: 4 }, 
 	[{ turn: 1, id: '123' }, { turn: 2, id: '456' }]//This is for <Game>.players
 );
 TheGame.createBoard();
