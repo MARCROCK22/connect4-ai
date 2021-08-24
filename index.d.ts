@@ -16,6 +16,7 @@ declare namespace ModuleConnect4 {
         readonly solution : null | Obj[];
         readonly lengthArr : number;
         readonly columns : number;
+        readonly necessaryToWin : number
         readonly _lastTurn : number;
         readonly start : null | number;
         readonly turn : number;
@@ -44,6 +45,7 @@ declare namespace ModuleConnect4 {
         constructor(options : {
             lengthArr : number;
             columns : number;
+            necessaryToWin : number;
         }, players : [PLAYER, PLAYER]);
     }
 
@@ -53,6 +55,7 @@ declare namespace ModuleConnect4 {
         constructor(options : {
             lengthArr : number;
             columns : number;
+            necessaryToWin : number;
         }, players : [PLAYER, PLAYER], recursiveDepthLimit? : number);
     }
 

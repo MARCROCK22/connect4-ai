@@ -11,10 +11,11 @@ class Connect4 {
         this._lastTurn = this.player2;
         this.start = null;
         this.plays = [];
+        this.necessaryToWin = options.necessaryToWin || 4;
     }
 
     get turn() {
-        return this._lastTurn == this.player1 ? this.player2 : this.player1;
+        return this._lastTurn === this.player1 ? this.player2 : this.player1;
     }
 
     /**
@@ -28,7 +29,7 @@ class Connect4 {
         this._lastTurn = turn;
         let method = 0;
         this.map[played][
-            this.map[played].filter((x) => x.key != 0).length
+            this.map[played].filter((x) => x.key !== 0).length
             ].key = turn;
         this.plays.push(played);
         let seguir = true;
@@ -39,7 +40,7 @@ class Connect4 {
                     for (const i of this.array) {
                         const {encontrado, veces} = this.checkArr(i);
 
-                        if (veces >= 4) {
+                        if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
                             this.__finished = true;
                             seguir = false;
@@ -61,7 +62,7 @@ class Connect4 {
 
                         const {encontrado, veces} = this.checkArr(arr);
 
-                        if (veces >= 4) {
+                        if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
                             this.__finished = true;
                             seguir = false;
@@ -77,10 +78,9 @@ class Connect4 {
                     for (const arr of arrLateral) {
                         const {encontrado, veces} = this.checkArr(
                             arr,
-                            method
                         );
 
-                        if (veces >= 4) {
+                        if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
                             this.__finished = true;
                             seguir = false;
@@ -102,7 +102,7 @@ class Connect4 {
                     for (const arr of arrLateral) {
                         const {encontrado, veces} = this.checkArr(arr);
 
-                        if (veces >= 4) {
+                        if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
                             this.__finished = true;
                             seguir = false;
@@ -125,7 +125,7 @@ class Connect4 {
             if (isNaN(play)) return false;
             if (!this.start) return true;
             if (this.finished) return false;
-            return this.map[play][this.lengthArr - 1].key == 0;
+            return this.map[play][this.lengthArr - 1].key === 0;
         } catch {
             return false;
         }
@@ -149,21 +149,20 @@ class Connect4 {
                     encontrado = j.key;
                     ++veces;
                     solution.push(j);
-                    continue;
                 }
             } else {
                 if (j.key === encontrado) {
                     ++veces;
                     solution.push(j);
                 } else {
-                    if (veces >= 4) break;
+                    if (veces >= this.necessaryToWin) break;
                     encontrado = j.key;
                     veces = j.key ? 1 : 0;
                     solution = j.key ? [j] : [];
                 }
             }
         }
-        if (!solution || solution.length < 4) solution = null;
+        if (!solution || solution.length < this.necessaryToWin) solution = null;
         this.solution = solution;
         return {encontrado, veces, solution};
     }
@@ -176,7 +175,7 @@ class Connect4 {
         return (
             this.__finished ||
             this.array.every(
-                (item) => item.filter((x) => x.key == 0).length == 0
+                (item) => item.filter((x) => x.key === 0).length === 0
             )
         );
     }
