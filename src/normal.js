@@ -30,7 +30,7 @@ class Connect4 {
         let method = 0;
         this.map[played][
             this.map[played].filter((x) => x.key !== 0).length
-            ].key = turn;
+        ].key = turn;
         this.plays.push(played);
         let seguir = true;
 
@@ -38,7 +38,7 @@ class Connect4 {
             switch (method) {
                 case 0: {
                     for (const i of this.array) {
-                        const {encontrado, veces} = this.checkArr(i);
+                        const { encontrado, veces } = this.checkArr(i);
 
                         if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
@@ -60,7 +60,7 @@ class Connect4 {
                         )
                             break;
 
-                        const {encontrado, veces} = this.checkArr(arr);
+                        const { encontrado, veces } = this.checkArr(arr);
 
                         if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
@@ -76,7 +76,7 @@ class Connect4 {
                 case 2: {
                     const arrLateral = lateralArray(this.array);
                     for (const arr of arrLateral) {
-                        const {encontrado, veces} = this.checkArr(
+                        const { encontrado, veces } = this.checkArr(
                             arr,
                         );
 
@@ -100,7 +100,7 @@ class Connect4 {
                         })
                     );
                     for (const arr of arrLateral) {
-                        const {encontrado, veces} = this.checkArr(arr);
+                        const { encontrado, veces } = this.checkArr(arr);
 
                         if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
@@ -164,7 +164,7 @@ class Connect4 {
         }
         if (!solution || solution.length < this.necessaryToWin) solution = null;
         this.solution = solution;
-        return {encontrado, veces, solution};
+        return { encontrado, veces, solution };
     }
 
     get tie() {

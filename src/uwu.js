@@ -51,6 +51,7 @@ class Connect4 {
 
     /*  Indicates whether a (zero-based index) column is playable. */
     canPlay(col) {
+        if (this.gameOver) return false;
         if (!this.board[col]) return false;
         return this.board[col].length < this.height;
     }
@@ -128,7 +129,7 @@ class Connect4 {
         let gotoNeighbor1 = () => null;
         let gotoNeighbor2 = () => null;
 
-        this.solution = [{column, spacesFromBottom}];
+        this.solution = [{ column, spacesFromBottom }];
         const mark = this.board[column][spacesFromBottom];
 
         const makeNeighborFunction = (dx, dy) => () => {
@@ -144,7 +145,7 @@ class Connect4 {
         for (let i = 0; i < 3; i++) {
             gotoNeighbor1();
             if (this.board[column] && this.board[column][spacesFromBottom] === mark) {
-                this.solution.push({column, spacesFromBottom});
+                this.solution.push({ column, spacesFromBottom });
             }
         }
 
@@ -159,7 +160,7 @@ class Connect4 {
         for (let i = 0; i < 3; i++) {
             gotoNeighbor2();
             if (this.board[column] && this.board[column][spacesFromBottom] === mark) {
-                this.solution.push({column, spacesFromBottom});
+                this.solution.push({ column, spacesFromBottom });
             }
         }
     }
@@ -253,7 +254,7 @@ class Connect4AI extends Connect4 {
     negamaxScores(maxDepth) {
         if (!maxDepth) maxDepth = this.recursiveDepthLimit;
 
-        const bestScores = Array.from({length: this.width}, (_, col) => {
+        const bestScores = Array.from({ length: this.width }, (_, col) => {
             if (!this.canPlay(col)) return null;
 
             const board = this.recreateBoard(this.getPlays());
@@ -304,7 +305,7 @@ function getTop3ScoreTiers(scores) {
 }
 
 function getTargetScore(difficulty, top3ScoreTiers) {
-    const {tier1Ratio, tier3Ratio} = difficultyRatios[difficulty.toLowerCase()];
+    const { tier1Ratio, tier3Ratio } = difficultyRatios[difficulty.toLowerCase()];
 
     const [tier1Score, tier2Score, tier3Score] = top3ScoreTiers;
     const [tier1Floor, tier2Floor, tier3Floor] = [1 - tier1Ratio, tier3Ratio, 0];
@@ -331,4 +332,4 @@ function getRandomEle(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-module.exports = {Connect4AI, Connect4};
+module.exports = { Connect4AI, Connect4 };
