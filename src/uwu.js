@@ -62,7 +62,6 @@ class Connect4 {
 
         const solutionDirection = this.isWinningMove(col);
         if (solutionDirection) {
-            console.log(solutionDirection)
             this.gameOver = true;
             this.winner = this.getActivePlayer();
         }
@@ -93,7 +92,6 @@ class Connect4 {
     isWinningMove(col) {
         const markToBePlayed = `${this.playerMarks[(this.moveCount + 1) % 2]}`;
         const winPreReq = markToBePlayed.repeat(this.ntw);
-        console.log(this.southwestBy3NortheastBy3(col), this.northwestBy3SoutheastBy3(col), this.westBy3EastBy3(col), this.southBy3(col));
         if (this.southwestBy3NortheastBy3(col).includes(winPreReq)) return SW_BY_NE;
         if (this.northwestBy3SoutheastBy3(col).includes(winPreReq)) return NW_BY_SE;
         if (this.westBy3EastBy3(col).includes(winPreReq)) return WEST_BY_EAST;
