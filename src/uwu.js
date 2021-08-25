@@ -32,7 +32,7 @@ class Connect4 {
         this.width = w;
         this.height = h;
         this.playerMarks = [2, 1];
-        this.ntw = ntw;
+        this.ntw = ntw || 3;
         this.reset();
     }
 
@@ -225,7 +225,7 @@ class Connect4AI extends Connect4 {
         super(w, h);
         this.w = w;
         this.h = h;
-        this.ntw = 3;
+        this.ntw = ntw || 3;
         this.recursiveDepthLimit = recursiveDepthLimit;
     }
 
