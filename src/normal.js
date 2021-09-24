@@ -43,7 +43,6 @@ class Connect4 {
                         if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
                             this.__finished = true;
-                            seguir = false;
                             break;
                         }
                     }
@@ -65,7 +64,6 @@ class Connect4 {
                         if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
                             this.__finished = true;
-                            seguir = false;
                             break;
                         }
                     }
@@ -83,7 +81,6 @@ class Connect4 {
                         if (veces >= this.necessaryToWin) {
                             this.winner = encontrado;
                             this.__finished = true;
-                            seguir = false;
                             break;
                         }
                     }
@@ -163,7 +160,10 @@ class Connect4 {
             }
         }
         if (!solution || solution.length < this.necessaryToWin) solution = null;
-        this.solution = solution;
+        if (this.solution) {
+            if (solution) this.solution.push(...solution)
+        } else this.solution = solution;
+
         return { encontrado, veces, solution };
     }
 
